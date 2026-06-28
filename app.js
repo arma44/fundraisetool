@@ -277,7 +277,7 @@ function showResults() {
         const readinessColor = getScaleColor(readinessPercent);
         
         if (isExcluded) {
-            // Category is excluded - show gray scales with 0%
+            // Category is excluded - show gray scales with actual percentages
             return `
                 <div class="category-result excluded">
                     <div class="category-header">
@@ -290,20 +290,20 @@ function showResults() {
                     <div class="scale-container">
                         <div class="scale-label">
                             <span>Fit</span>
-                            <span>N/A</span>
+                            <span>${fitPercent}%</span>
                         </div>
                         <div class="scale-bar">
-                            <div class="scale-fill-gray" style="width: 100%"></div>
+                            <div class="scale-fill-gray" style="width: ${fitPercent}%"></div>
                         </div>
                     </div>
                     
                     <div class="scale-container">
                         <div class="scale-label">
                             <span>Readiness</span>
-                            <span>N/A</span>
+                            <span>${readinessPercent}%</span>
                         </div>
                         <div class="scale-bar">
-                            <div class="scale-fill-gray" style="width: 100%"></div>
+                            <div class="scale-fill-gray" style="width: ${readinessPercent}%"></div>
                         </div>
                     </div>
                     
