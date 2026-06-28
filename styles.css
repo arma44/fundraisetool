@@ -427,12 +427,23 @@ input[type="radio"]:checked + span::before {
 
 .scale-fill {
     height: 100%;
-    background: linear-gradient(90deg, #dc2626 0%, #991b1b 100%);
     transition: width 1s ease;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     padding-right: 10px;
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.scale-fill-gray {
+    height: 100%;
+    background: #9ca3af;
+    transition: width 1s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: white;
     font-weight: 600;
     font-size: 0.9rem;
