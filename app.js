@@ -268,8 +268,16 @@ function showResults() {
         const fitScore = state.scores.fit[category.key];
         const readinessScore = state.scores.readiness[category.key];
         
+        // Normalize scores to percentages
+        const fitPercent = normalizeScore(fitScore, minFitScore, maxFitScore);
+        const readinessPercent = normalizeScore(readinessScore, minReadinessScore, maxReadinessScore);
+        
+        // Determine color for Fit scale
+        const fitColor = getScaleColor(fitPercent);
+        const readinessColor = getScaleColor(readinessPercent);
+        
         if (isExcluded) {
-            // Category is excluded - show gray with explanation
+            // Category is excluded - show gray scales with 0%
             return `
                 <div class="category-result excluded">
                     <div class="category-header">
@@ -279,16 +287,32 @@ function showResults() {
                         </div>
                     </div>
                     
+                    <div class="scale-container">
+                        <div class="scale-label">
+                            <span>Fit</span>
+                            <span>N/A</span>
+                        </div>
+                        <div class="scale-bar">
+                            <div class="scale-fill-gray" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="scale-container">
+                        <div class="scale-label">
+                            <span>Readiness</span>
+                            <span>N/A</span>
+                        </div>
+                        <div class="scale-bar">
+                            <div class="scale-fill-gray" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    
                     <div class="exclusion-reason">
-                        This funding instrument is not considered based on your funding amount and project development area.
+                        This funding instrument is currently not applicable based on your funding amount, purpose, and equity preferences.
                     </div>
                 </div>
             `;
         }
-        
-        // Normalize scores to percentages
-        const fitPercent = normalizeScore(fitScore, minFitScore, maxFitScore);
-        const readinessPercent = normalizeScore(readinessScore, minReadinessScore, maxReadinessScore);
         
         // Determine overall recommendation
         const recommendation = getRecommendation(fitPercent, readinessPercent);
@@ -308,7 +332,7 @@ function showResults() {
                         <span>${fitPercent}%</span>
                     </div>
                     <div class="scale-bar">
-                        <div class="scale-fill" style="width: ${fitPercent}%"></div>
+                        <div class="scale-fill" style="width: ${fitPercent}%; background: ${fitColor};"></div>
                     </div>
                 </div>
                 
@@ -318,7 +342,7 @@ function showResults() {
                         <span>${readinessPercent}%</span>
                     </div>
                     <div class="scale-bar">
-                        <div class="scale-fill" style="width: ${readinessPercent}%"></div>
+                        <div class="scale-fill" style="width: ${readinessPercent}%; background: ${readinessColor};"></div>
                     </div>
                 </div>
                 
@@ -410,6 +434,17 @@ function showResults() {
 function normalizeScore(score, min, max) {
     const normalized = ((score - min) / (max - min)) * 100;
     return Math.max(0, Math.min(100, Math.round(normalized)));
+}
+
+// Get color for scale based on percentage
+function getScaleColor(percent) {
+    if (percent <= 30) {
+        return '#dc2626'; // Red
+    } else if (percent <= 66) {
+        return '#fbbf24'; // Yellow
+    } else {
+        return '#10b981'; // Green
+    }
 }
 
 // Get stop-factor explanation based on category and level
