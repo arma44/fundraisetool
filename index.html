@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundraising Toolkit - Funding Assessment Tool</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Step 1: Profile Selection -->
+        <div id="step-profile" class="step active">
+            <h1>Fundraising Toolkit</h1>
+            <p class="subtitle">A tool to determine the most suitable funding type for your business</p>
+            
+            <div class="profile-selection">
+                <h2>Select Your Profile</h2>
+                
+                <div class="question-group">
+                    <label class="profile-label">What country are you from?</label>
+                    <div class="country-buttons">
+                        <button type="button" class="country-btn" data-type="origin" data-value="UA">
+                            <span class="country-flag">🇺🇦</span>
+                            <span class="country-name">Ukraine</span>
+                        </button>
+                        <button type="button" class="country-btn" data-type="origin" data-value="BY">
+                            <span class="country-flag">🇧🇾</span>
+                            <span class="country-name">Belarus</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <label class="profile-label">In which country do you plan to raise funding?</label>
+                    <div class="country-buttons">
+                        <button type="button" class="country-btn" data-type="destination" data-value="LT">
+                            <span class="country-flag">🇱🇹</span>
+                            <span class="country-name">Lithuania</span>
+                        </button>
+                        <button type="button" class="country-btn" data-type="destination" data-value="PL">
+                            <span class="country-flag">🇵🇱</span>
+                            <span class="country-name">Poland</span>
+                        </button>
+                    </div>
+                </div>
+
+                <button id="btn-start" class="btn-primary" disabled>Start Assessment</button>
+            </div>
+        </div>
+
+        <!-- Step 2: Questionnaire -->
+        <div id="step-questions" class="step">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress"></div>
+            </div>
+            <div class="question-counter">Question <span id="current-q">1</span> of <span id="total-q">10</span></div>
+            
+            <div id="question-container"></div>
+            
+            <div class="navigation">
+                <button id="btn-back" class="btn-secondary" disabled>Back</button>
+                <button id="btn-next" class="btn-primary" disabled>Next</button>
+            </div>
+        </div>
+
+        <!-- Step 3: Results -->
+        <div id="step-results" class="step">
+            <h1>Assessment Results</h1>
+            <p class="subtitle">Based on your answers, we have identified the most suitable funding instruments for your business</p>
+            
+            <div id="results-container"></div>
+            
+            <div class="action-buttons">
+                <button id="btn-restart" class="btn-secondary">Start Over</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
